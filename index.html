@@ -28,5 +28,261 @@
       <!-- 他のカテゴリもここに追加可能 -->
     </ul>
   </div>
+  <script>
+    // 落下エフェクト用
+    let chocoSeq = '';
+    let gravityActive = false;
+    let gravityInterval = null;
+    document.addEventListener('keydown', function gravityKeyHandler(e) {
+      if (gravityActive) return;
+      const key = e.key.toUpperCase();
+      if ('CHOCO'.includes(key)) {
+        chocoSeq += key;
+        if (!'CHOCO'.startsWith(chocoSeq)) chocoSeq = key === 'C' ? 'C' : '';
+        if (chocoSeq === 'CHOCO') triggerGravity();
+      } else {
+        chocoSeq = '';
+      }
+    });
+
+    // --- カオス強化 ---
+    // 1. 落下時にランダムな色・サイズ・回転・影・振動を付与
+    // 2. 虹色ボタンも毎回色・サイズ・エフェクトが変化
+    // 3. たまに爆発エフェクトや回転しながら消える演出
+    // 4. 画面全体に一瞬だけ虹色フラッシュ
+
+    // 画面フラッシュ
+    function chaosFlash() {
+    //   const flash = document.createElement('div');
+    //   flash.style.position = 'fixed';
+    //   flash.style.left = 0;
+    //   flash.style.top = 0;
+    //   flash.style.width = '100vw';
+    //   flash.style.height = '100vh';
+    //   flash.style.zIndex = 9999;
+    //   flash.style.pointerEvents = 'none';
+    //   flash.style.background = 'linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet)';
+    //   flash.style.opacity = '0.7';
+    //   document.body.appendChild(flash);
+    //   setTimeout(() => { flash.style.transition = 'opacity 0.5s'; flash.style.opacity = '0'; }, 80);
+    //   setTimeout(() => { flash.remove(); }, 700);
+    }
+
+    // 爆発エフェクト
+    function chaosExplosion(x, y) {
+      // 連鎖防止用フラグ
+      if (chaosExplosion._lock) return;
+      chaosExplosion._lock = true;
+      setTimeout(() => { chaosExplosion._lock = false; }, 100); // 0.1秒だけロック
+      for (let i = 0; i < 18; i++) {
+        const p = document.createElement('div');
+        p.style.position = 'fixed';
+        p.style.left = x + 'px';
+        p.style.top = y + 'px';
+        p.style.width = p.style.height = (Math.random() * 16 + 8) + 'px';
+        p.style.borderRadius = '50%';
+        p.style.background = `hsl(${Math.random()*360},90%,60%)`;
+        p.style.zIndex = 9999;
+        p.style.pointerEvents = 'none';
+        document.body.appendChild(p);
+        let vx = Math.cos(i/18*2*Math.PI) * (Math.random()*8+6);
+        let vy = Math.sin(i/18*2*Math.PI) * (Math.random()*8+6);
+        let g = 0.5;
+        let life = 0;
+        function anim() {
+          vx *= 0.96;
+          vy += g;
+          p.style.left = (parseFloat(p.style.left) + vx) + 'px';
+          p.style.top = (parseFloat(p.style.top) + vy) + 'px';
+          p.style.opacity = (1 - life/30).toString();
+          life++;
+          if (life < 30) requestAnimationFrame(anim);
+          else p.remove();
+        }
+        anim();
+      }
+    }
+
+    // 落下エフェクト拡張
+    function triggerGravity() {
+      gravityActive = true;
+      const container = document.querySelector('.container');
+      // containerを75vw/75vh・中央に拡大
+      container.style.position = 'fixed';
+      container.style.left = '50%';
+      container.style.top = '50%';
+      container.style.transform = 'translate(-50%, -50%)';
+      container.style.width = '75vw';
+      container.style.height = '75vh';
+      container.style.maxWidth = 'none';
+      container.style.margin = '0';
+      container.style.borderRadius = '0';
+      container.style.boxShadow = 'none';
+      container.style.background = 'rgba(255,255,255,0.95)';
+      const elements = Array.from(container.querySelectorAll('a, h1, li, ul'));
+      elements.forEach(el => {
+        el.style.position = 'absolute';
+        el.style.transition = 'none';
+        const rect = el.getBoundingClientRect();
+        const cRect = container.getBoundingClientRect();
+        el.style.left = (rect.left - cRect.left) + 'px';
+        el.style.top = (rect.top - cRect.top) + 'px';
+        el.dataset.vx = (Math.random() * 10 - 5).toFixed(2); // -5〜5
+        el.dataset.vy = (Math.random() * 6 + 2).toFixed(2); // 2〜8
+        el.dataset.rotate = (Math.random() * 360 - 180).toFixed(2);
+        el.dataset.vr = (Math.random() * 8 - 4).toFixed(2); // -4〜4
+        // ランダム色・影のみ（大きさ・フォントサイズは固定）
+        el.style.background = `hsl(${Math.random()*360},80%,85%)`;
+        el.style.color = `hsl(${Math.random()*360},80%,30%)`;
+        el.style.boxShadow = `0 0 32px 8px hsl(${Math.random()*360},80%,80%,0.7)`;
+        // 大きさ・フォントサイズは変更しない
+        // transformは回転のみ
+        el.style.transform = `rotate(${el.dataset.rotate}deg)`;
+        // 振動
+        el.dataset.shake = Math.random() > 0.7 ? '1' : '0';
+      });
+      gravityInterval = setInterval(() => {
+        const cRect = container.getBoundingClientRect();
+        elements.forEach(el => {
+          let left = parseFloat(el.style.left);
+          let top = parseFloat(el.style.top);
+          let vx = parseFloat(el.dataset.vx);
+          let vy = parseFloat(el.dataset.vy);
+          let rot = parseFloat(el.dataset.rotate);
+          let vr = parseFloat(el.dataset.vr);
+          vy += 0.5; // 重力加速度UP
+          left += vx;
+          top += vy;
+          rot += vr;
+          // 端で跳ね返り
+          const elW = el.offsetWidth;
+          const elH = el.offsetHeight;
+          let hitWall = false;
+          if (left < 0) { left = 0; vx *= -1.1; hitWall = true; chaosFlash(); }
+          if (left + elW > container.offsetWidth) { left = container.offsetWidth - elW; vx *= -1.1; hitWall = true; chaosFlash(); }
+          if (top + elH > container.offsetHeight) {
+            top = container.offsetHeight - elH;
+            vy *= -1.05;
+            if (Math.abs(vy) < 2) vy = -Math.random() * 8 - 4;
+            hitWall = true;
+          }
+          if (top < 0) { top = 0; vy *= -1.1; hitWall = true; chaosFlash(); }
+          // 壁にぶつかった時だけ爆発
+          if (hitWall) chaosExplosion(left + elW/2 + cRect.left, top + elH/2 + cRect.top);
+          el.style.left = left + 'px';
+          el.style.top = top + 'px';
+          el.style.transform = `scale(${Math.random()*1.2+0.7}) rotate(${rot}deg)`;
+          el.dataset.vx = vx;
+          el.dataset.vy = vy;
+          el.dataset.rotate = rot;
+          // 振動
+          if (el.dataset.shake === '1') {
+            el.style.left = (left + Math.sin(Date.now()/30)*6) + 'px';
+            el.style.top = (top + Math.cos(Date.now()/30)*6) + 'px';
+          }
+          // たまに消える
+        //   if (Math.random() > 0.995 && el.style.opacity !== '0') {
+        //     el.style.transition = 'opacity 0.7s, transform 0.7s';
+        //     el.style.opacity = '0';
+        //     el.style.transform += ' scale(2) rotate(720deg)';
+        //     setTimeout(()=>el.remove(),700);
+        //   }
+        });
+      }, 20);
+    }
+
+    // 虹色ボタンもカオス化（軽量化バージョン）
+    function spawnRainbowButton() {
+      const container = document.querySelector('.container');
+      const links = Array.from(container.querySelectorAll('a'));
+      if (links.length === 0) return;
+      // linksが無い場合は中央に出す
+      let left = 0, top = 0, cRect;
+      if (links.length === 0) {
+        cRect = container.getBoundingClientRect();
+        left = container.offsetWidth / 2;
+        top = container.offsetHeight / 2;
+      } else {
+        const base = links[Math.floor(Math.random() * links.length)];
+        const baseRect = base.getBoundingClientRect();
+        cRect = container.getBoundingClientRect();
+        left = baseRect.left - cRect.left;
+        top = baseRect.top - cRect.top;
+      }
+      const btn = document.createElement('button');
+      btn.textContent = 'RANDOM';
+      btn.style.position = 'absolute';
+      btn.style.left = left + 'px';
+      btn.style.top = top + 'px';
+      btn.style.zIndex = 1000;
+      // 毎回ランダムな虹色グラデ
+      const deg = Math.floor(Math.random()*360);
+      btn.style.background = `linear-gradient(${deg}deg, #ff6ec4, #4f8cff, #6effc4, #ffe66e, #ff6ec4)`;
+      btn.style.color = `hsl(${Math.random()*360},90%,95%)`;
+      btn.style.border = 'none';
+      btn.style.borderRadius = (Math.random()*32+16)+'px';
+      btn.style.padding = (Math.random()*16+8)+'px '+(Math.random()*36+24)+'px';
+      btn.style.fontSize = (Math.random()*1.2+1)+'em';
+      btn.style.boxShadow = `0 0 16px 4px hsl(${Math.random()*360},80%,80%,0.5)`; // 軽量化
+      btn.style.cursor = 'pointer';
+      btn.style.transition = 'box-shadow 0.2s, transform 0.2s';
+      btn.style.rotate = (Math.random() * 360 - 180) + 'deg';
+      btn.style.transform = `scale(1) rotate(${btn.style.rotate})`;
+      container.appendChild(btn);
+      // 物理パラメータ
+      let vx = (Math.random() < 0.5 ? 1 : -1) * (Math.random() * 4 + 2); // 速度控えめ
+      let vy = (Math.random() * 2 - 1);
+      let rot = parseFloat(btn.style.rotate);
+      let vr = (Math.random() * 4 - 2); // 回転控えめ
+      // アニメーション
+      let frame = 0;
+      function animate() {
+        let left = parseFloat(btn.style.left);
+        let top = parseFloat(btn.style.top);
+        vy += 0.3; // 重力控えめ
+        left += vx;
+        top += vy;
+        rot += vr;
+        // 端で跳ね返り
+        const elW = btn.offsetWidth;
+        const elH = btn.offsetHeight;
+        let hitWall = false;
+        if (left < 0) { left = 0; vx *= -1.05; hitWall = true; }
+        if (left + elW > container.offsetWidth) { left = container.offsetWidth - elW; vx *= -1.05; hitWall = true; }
+        if (top + elH > container.offsetHeight) {
+          top = container.offsetHeight - elH;
+          vy *= -0.9;
+          if (Math.abs(vy) < 1) vy = -Math.random() * 2 - 2;
+          hitWall = true;
+        }
+        if (top < 0) { top = 0; vy *= -1.05; hitWall = true; }
+        btn.style.left = left + 'px';
+        btn.style.top = top + 'px';
+        btn.style.transform = `scale(1) rotate(${rot}deg)`;
+        // 爆発は壁ヒット時のみ、確率も下げる
+        if (hitWall && Math.random() > 0.95) chaosExplosion(left + elW/2 + cRect.left, top + elH/2 + cRect.top);
+        // たまに消える
+        if (Math.random() > 0.998 && btn.style.opacity !== '0') {
+          btn.style.transition = 'opacity 0.7s, transform 0.7s';
+          btn.style.opacity = '0';
+          btn.style.transform += ' scale(1.5) rotate(360deg)';
+          setTimeout(()=>btn.remove(),700);
+          return;
+        }
+        frame++;
+        if ( container.contains(btn)) requestAnimationFrame(animate); // 最大600フレーム(約10秒)
+        else if (container.contains(btn)) btn.remove();
+      }
+      requestAnimationFrame(animate);
+    }
+
+    // setIntervalも軽量化→1~5秒に1回召喚
+    function rainbowButtonInterval() {
+      if (gravityActive) spawnRainbowButton();
+      if (gravityActive && Math.random() > 0.98) chaosFlash();
+      setTimeout(rainbowButtonInterval, 100 ); // 1~5秒
+    }
+    rainbowButtonInterval();
+  </script>
 </body>
 </html>
