@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>フォーム素材 - CSSチートシート</title>
+  <style>
+    body { font-family: sans-serif; background: #f7f7f7; margin: 0; padding: 0; }
+    .container { max-width: 700px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px #0001; padding: 32px; }
+    h1 { text-align: center; }
+    .cheat-block { margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 32px; }
+    .sample { margin: 16px 0; padding: 24px; background: #f0f4ff; border-radius: 8px; display: flex; align-items: center; justify-content: center; min-height: 60px; }
+    pre { background: #222; color: #fff; padding: 16px; border-radius: 8px; overflow-x: auto; position: relative; }
+    button.copy-btn { position: absolute; top: 8px; right: 8px; background: #4f8cff; color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-size: 0.9em; }
+    button.copy-btn:hover { background: #2563eb; }
+    .back-link { display: inline-block; margin-bottom: 24px; color: #4f8cff; text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+    /* サンプル用フォーム装飾 */
+    .input {
+      padding: 10px 16px;
+      border: 2px solid #4f8cff;
+      border-radius: 6px;
+      font-size: 1.1em;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .input:focus {
+      border-color: #ff6ec4;
+    }
+    .checkbox {
+      accent-color: #4f8cff;
+      width: 20px; height: 20px;
+    }
+    .radio {
+      accent-color: #ff6ec4;
+      width: 20px; height: 20px;
+    }
+    .select {
+      padding: 10px 16px;
+      border: 2px solid #4f8cff;
+      border-radius: 6px;
+      font-size: 1.1em;
+      background: #fff;
+      color: #4f8cff;
+    }
+    /* --- 競合修正: .sliderの重複を解消 --- */
+    /* スライダー用 */
+    .input-slider {
+      width: 180px;
+      accent-color: #ff6ec4;
+    }
+    /* トグルスイッチ用 */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 54px;
+      height: 30px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .switch-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: #ccc;
+      border-radius: 30px;
+      transition: .3s;
+    }
+    .switch-slider:before {
+      position: absolute;
+      content: "";
+      height: 22px;
+      width: 22px;
+      left: 4px;
+      bottom: 4px;
+      background: #fff;
+      border-radius: 50%;
+      transition: .3s;
+    }
+    .switch input:checked + .switch-slider {
+      background: #4f8cff;
+    }
+    .switch input:checked + .switch-slider:before {
+      transform: translateX(24px);
+    }
+    /* 追加スタイル */
+    .input-file {
+      padding: 8px 0;
+      font-size: 1.05em;
+      color: #4f8cff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Hubに戻る</a>
+    <h1>フォーム素材</h1>
+    <div class="cheat-block">
+      <h2>テキスト入力</h2>
+      <div class="sample"><input class="input" type="text" placeholder="テキストを入力"></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;input class="input" type="text" placeholder="テキストを入力"&gt;
+.input {
+  padding: 10px 16px;
+  border: 2px solid #4f8cff;
+  border-radius: 6px;
+  font-size: 1.1em;
+  outline: none;
+  transition: border 0.2s;
+}
+.input:focus {
+  border-color: #ff6ec4;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>チェックボックス</h2>
+      <div class="sample"><input class="checkbox" type="checkbox" id="cb1"><label for="cb1"> チェック</label></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;input class="checkbox" type="checkbox" id="cb1"&gt;&lt;label for="cb1"&gt; チェック&lt;/label&gt;
+.checkbox {
+  accent-color: #4f8cff;
+  width: 20px; height: 20px;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>ラジオボタン</h2>
+      <div class="sample"><input class="radio" type="radio" id="r1" name="r"><label for="r1"> A</label> <input class="radio" type="radio" id="r2" name="r"><label for="r2"> B</label></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;input class="radio" type="radio" id="r1" name="r"&gt;&lt;label for="r1"&gt; A&lt;/label&gt;
+&lt;input class="radio" type="radio" id="r2" name="r"&gt;&lt;label for="r2"&gt; B&lt;/label&gt;
+.radio {
+  accent-color: #ff6ec4;
+  width: 20px; height: 20px;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>セレクトボックス</h2>
+      <div class="sample"><select class="select"><option>選択肢1</option><option>選択肢2</option></select></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;select class="select"&gt;&lt;option&gt;選択肢1&lt;/option&gt;&lt;option&gt;選択肢2&lt;/option&gt;&lt;/select&gt;
+.select {
+  padding: 10px 16px;
+  border: 2px solid #4f8cff;
+  border-radius: 6px;
+  font-size: 1.1em;
+  background: #fff;
+  color: #4f8cff;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>スライダー</h2>
+      <div class="sample"><input class="input-slider" type="range" min="0" max="100"></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;input class="input-slider" type="range" min="0" max="100"&gt;
+.input-slider {
+  width: 180px;
+  accent-color: #ff6ec4;
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>パスワード入力</h2>
+      <div class="sample"><input class="input" type="password" placeholder="パスワード"></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;input class="input" type="password" placeholder="パスワード"&gt;
+.input {
+  padding: 10px 16px;
+  border: 2px solid #4f8cff;
+  border-radius: 6px;
+  font-size: 1.1em;
+  outline: none;
+  transition: border 0.2s;
+}
+.input:focus {
+  border-color: #ff6ec4;
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>テキストエリア</h2>
+      <div class="sample"><textarea class="input" rows="3" placeholder="メッセージを入力"></textarea></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;textarea class="input" rows="3" placeholder="メッセージを入力"&gt;&lt;/textarea&gt;
+.input {
+  padding: 10px 16px;
+  border: 2px solid #4f8cff;
+  border-radius: 6px;
+  font-size: 1.1em;
+  outline: none;
+  transition: border 0.2s;
+}
+.input:focus {
+  border-color: #ff6ec4;
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>トグルスイッチ</h2>
+      <div class="sample"><label class="switch"><input type="checkbox"><span class="switch-slider"></span></label></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;label class="switch"&gt;&lt;input type="checkbox"&gt;&lt;span class="switch-slider"&gt;&lt;/span&gt;&lt;/label&gt;
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 54px;
+  height: 30px;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.switch-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: #ccc;
+  border-radius: 30px;
+  transition: .3s;
+}
+.switch-slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background: #fff;
+  border-radius: 50%;
+  transition: .3s;
+}
+.switch input:checked + .switch-slider {
+  background: #4f8cff;
+}
+.switch input:checked + .switch-slider:before {
+  transform: translateX(24px);
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>ファイル選択</h2>
+      <div class="sample"><input class="input-file" type="file"></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;input class="input-file" type="file"&gt;
+.input-file {
+  padding: 8px 0;
+  font-size: 1.05em;
+  color: #4f8cff;
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>日付ピッカー</h2>
+      <div class="sample"><input class="input" type="date"></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;input class="input" type="date"&gt;
+.input {
+  padding: 10px 16px;
+  border: 2px solid #4f8cff;
+  border-radius: 6px;
+  font-size: 1.1em;
+  outline: none;
+  transition: border 0.2s;
+}
+.input:focus {
+  border-color: #ff6ec4;
+}
+</code></pre>
+    </div>
+  </div>
+  <script>
+    function copyCode(btn) {
+      const code = btn.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'コピー済み!';
+      setTimeout(() => btn.textContent = 'コピー', 1200);
+    }
+  </script>
+</body>
+</html>

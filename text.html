@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS文字装飾 チートシート</title>
+  <style>
+    body { font-family: sans-serif; background: #f7f7f7; margin: 0; padding: 0; }
+    .container { max-width: 700px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px #0001; padding: 32px; }
+    h1 { text-align: center; }
+    .cheat-block { margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 32px; }
+    .sample { margin: 16px 0; padding: 24px; background: #f0f4ff; border-radius: 8px; display: flex; align-items: center; justify-content: center; min-height: 60px; }
+    pre { background: #222; color: #fff; padding: 16px; border-radius: 8px; overflow-x: auto; position: relative; }
+    button.copy-btn { position: absolute; top: 8px; right: 8px; background: #4f8cff; color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-size: 0.9em; }
+    button.copy-btn:hover { background: #2563eb; }
+    .back-link { display: inline-block; margin-bottom: 24px; color: #4f8cff; text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+    .text-shadow {
+      font-size: 2em;
+      color: #4f8cff;
+      text-shadow: 2px 2px 8px #2563eb88;
+    }
+    .gradient-text {
+      font-size: 2em;
+      background: linear-gradient(90deg, #4f8cff, #ff6ec4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+    .bold-text {
+      font-weight: bold;
+    }
+    .italic-text {
+      font-style: italic;
+    }
+    .underline-text {
+      text-decoration: underline;
+    }
+    .dotted-underline {
+      text-decoration: underline dotted #4f8cff;
+    }
+    .double-underline {
+      text-decoration: underline double #4f8cff;
+    }
+    .line-through {
+      text-decoration: line-through;
+    }
+    .shadow-text {
+      color: #222;
+      text-shadow: 2px 2px 8px #4f8cff88;
+    }
+    .outline-text {
+      color: #fff;
+      -webkit-text-stroke: 2px #4f8cff;
+    }
+    .marker-text {
+      background: linear-gradient(transparent 60%, #ffe66e 60%);
+    }
+    .rounded-bg {
+      background: #4f8cff22;
+      border-radius: 12px;
+      padding: 4px 16px;
+    }
+    .bold-italic-text {
+      font-weight: bold;
+      font-style: italic;
+    }
+    .uppercase-text {
+      text-transform: uppercase;
+    }
+    .lowercase-text {
+      text-transform: lowercase;
+    }
+    .capitalize-text {
+      text-transform: capitalize;
+    }
+    .letter-space-text {
+      letter-spacing: 0.2em;
+    }
+    .line-height-text {
+      line-height: 2.2;
+    }
+    .shadow-underline {
+      text-decoration: underline;
+      text-shadow: 2px 2px 8px #4f8cff88;
+    }
+    .wavy-underline {
+      text-decoration: underline wavy #ff6ec4;
+    }
+    .bg-gradient-text {
+      background: linear-gradient(90deg, #4f8cff, #ffe66e);
+      color: #fff;
+      padding: 4px 16px;
+      border-radius: 8px;
+    }
+    .outline-shadow-text {
+      color: #fff;
+      -webkit-text-stroke: 2px #4f8cff;
+      text-shadow: 2px 2px 8px #ff6ec488;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Hubに戻る</a>
+    <h1>CSS文字装飾 チートシート</h1>
+    <div class="cheat-block">
+      <h2>テキストシャドウ</h2>
+      <div class="sample"><span class="text-shadow">Shadow!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.text-shadow {
+  color: #4f8cff;
+  text-shadow: 2px 2px 8px #2563eb88;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>グラデーションテキスト</h2>
+      <div class="sample"><span class="gradient-text">Gradient!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.gradient-text {
+  background: linear-gradient(90deg, #4f8cff, #ff6ec4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>太字</h2>
+      <div class="sample"><span class="bold-text">Bold!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.bold-text {
+  font-weight: bold;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>イタリック</h2>
+      <div class="sample"><span class="italic-text">Italic!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.italic-text {
+  font-style: italic;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>下線</h2>
+      <div class="sample"><span class="underline-text">Underline!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.underline-text {
+  text-decoration: underline;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>点線下線</h2>
+      <div class="sample"><span class="dotted-underline">Dotted Underline!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.dotted-underline {
+  text-decoration: underline dotted #4f8cff;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>二重線</h2>
+      <div class="sample"><span class="double-underline">Double Underline!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.double-underline {
+  text-decoration: underline double #4f8cff;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>取り消し線</h2>
+      <div class="sample"><span class="line-through">Line Through!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.line-through {
+  text-decoration: line-through;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>影付きテキスト</h2>
+      <div class="sample"><span class="shadow-text">Shadow Text!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.shadow-text {
+  color: #222;
+  text-shadow: 2px 2px 8px #4f8cff88;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>アウトラインテキスト</h2>
+      <div class="sample"><span class="outline-text">Outline!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.outline-text {
+  color: #fff;
+  -webkit-text-stroke: 2px #4f8cff;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>マーカー風</h2>
+      <div class="sample"><span class="marker-text">Marker!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.marker-text {
+  background: linear-gradient(transparent 60%, #ffe66e 60%);
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>角丸背景</h2>
+      <div class="sample"><span class="rounded-bg">Rounded BG!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.rounded-bg {
+  background: #4f8cff22;
+  border-radius: 12px;
+  padding: 4px 16px;
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>斜体＋太字</h2>
+      <div class="sample"><span class="bold-italic-text">Bold Italic!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.bold-italic-text {
+  font-weight: bold;
+  font-style: italic;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>大文字化</h2>
+      <div class="sample"><span class="uppercase-text">Uppercase!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.uppercase-text {
+  text-transform: uppercase;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>小文字化</h2>
+      <div class="sample"><span class="lowercase-text">Lowercase!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.lowercase-text {
+  text-transform: lowercase;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>キャピタライズ</h2>
+      <div class="sample"><span class="capitalize-text">capitalize each word</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.capitalize-text {
+  text-transform: capitalize;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>文字間隔広め</h2>
+      <div class="sample"><span class="letter-space-text">Letter Spacing!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.letter-space-text {
+  letter-spacing: 0.2em;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>行間広め</h2>
+      <div class="sample"><span class="line-height-text">Line Height Example<br>2行目</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.line-height-text {
+  line-height: 2.2;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>影付き下線</h2>
+      <div class="sample"><span class="shadow-underline">Shadow Underline!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.shadow-underline {
+  text-decoration: underline;
+  text-shadow: 2px 2px 8px #4f8cff88;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>波線下線</h2>
+      <div class="sample"><span class="wavy-underline">Wavy Underline!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.wavy-underline {
+  text-decoration: underline wavy #ff6ec4;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>背景グラデーション</h2>
+      <div class="sample"><span class="bg-gradient-text">BG Gradient!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.bg-gradient-text {
+  background: linear-gradient(90deg, #4f8cff, #ffe66e);
+  color: #fff;
+  padding: 4px 16px;
+  border-radius: 8px;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>縁取り＋影</h2>
+      <div class="sample"><span class="outline-shadow-text">Outline + Shadow!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.outline-shadow-text {
+  color: #fff;
+  -webkit-text-stroke: 2px #4f8cff;
+  text-shadow: 2px 2px 8px #ff6ec488;
+}</code></pre>
+    </div>
+  </div>
+  <script>
+    function copyCode(btn) {
+      const code = btn.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'コピー済み!';
+      setTimeout(() => btn.textContent = 'コピー', 1200);
+    }
+  </script>
+</body>
+</html>

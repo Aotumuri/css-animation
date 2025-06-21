@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>カード素材 - CSSチートシート</title>
+  <style>
+    body { font-family: sans-serif; background: #f7f7f7; margin: 0; padding: 0; }
+    .container { max-width: 700px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px #0001; padding: 32px; }
+    h1 { text-align: center; }
+    .cheat-block { margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 32px; }
+    .sample { margin: 16px 0; padding: 24px; background: #f0f4ff; border-radius: 8px; display: flex; align-items: center; justify-content: center; min-height: 60px; }
+    pre { background: #222; color: #fff; padding: 16px; border-radius: 8px; overflow-x: auto; position: relative; }
+    button.copy-btn { position: absolute; top: 8px; right: 8px; background: #4f8cff; color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-size: 0.9em; }
+    button.copy-btn:hover { background: #2563eb; }
+    .back-link { display: inline-block; margin-bottom: 24px; color: #4f8cff; text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+    /* カードサンプル用 */
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px #4f8cff22;
+      padding: 28px 32px;
+      min-width: 220px;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .card:hover {
+      box-shadow: 0 8px 32px #4f8cff44;
+      transform: translateY(-6px) scale(1.03);
+    }
+    .card-title {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #4f8cff;
+    }
+    .card-desc {
+      color: #444;
+      font-size: 1em;
+    }
+    .card-footer {
+      margin-top: 12px;
+      font-size: 0.95em;
+      color: #888;
+    }
+    .card-hover:hover {
+      transform: scale(1.07) rotate(-1deg);
+      box-shadow: 0 12px 32px #ff6ec488;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Hubに戻る</a>
+    <h1>カード素材</h1>
+    <div class="cheat-block">
+      <h2>基本カード</h2>
+      <div class="sample">
+        <div class="card">
+          <div class="card-title">タイトル</div>
+          <div class="card-desc">説明テキストがここに入ります。</div>
+          <div class="card-footer">フッター</div>
+        </div>
+      </div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;div class="card"&gt;
+  &lt;div class="card-title"&gt;タイトル&lt;/div&gt;
+  &lt;div class="card-desc"&gt;説明テキストがここに入ります。&lt;/div&gt;
+  &lt;div class="card-footer"&gt;フッター&lt;/div&gt;
+&lt;/div&gt;
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px #4f8cff22;
+  padding: 28px 32px;
+  min-width: 220px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.card:hover {
+  box-shadow: 0 8px 32px #4f8cff44;
+  transform: translateY(-6px) scale(1.03);
+}
+.card-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #4f8cff;
+}
+.card-desc {
+  color: #444;
+  font-size: 1em;
+}
+.card-footer {
+  margin-top: 12px;
+  font-size: 0.95em;
+  color: #888;
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>イメージ付きカード</h2>
+      <div class="sample">
+        <div class="card">
+          <img src="https://placehold.jp/120x80.png" alt="サンプル画像" style="width:100%;border-radius:8px 8px 0 0;">
+          <div class="card-title">イメージカード</div>
+          <div class="card-desc">画像とテキストの組み合わせ。</div>
+        </div>
+      </div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;div class="card"&gt;
+  &lt;img src="画像URL" alt="サンプル画像" style="width:100%;border-radius:8px 8px 0 0;"&gt;
+  &lt;div class="card-title"&gt;イメージカード&lt;/div&gt;
+  &lt;div class="card-desc"&gt;画像とテキストの組み合わせ。&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>プロフィールカード</h2>
+      <div class="sample">
+        <div class="card" style="align-items:center;text-align:center;">
+          <img src="https://placehold.jp/60x60.png" alt="アイコン" style="width:60px;height:60px;border-radius:50%;margin-bottom:8px;">
+          <div class="card-title">山田 太郎</div>
+          <div class="card-desc">Webデザイナー</div>
+        </div>
+      </div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;div class="card" style="align-items:center;text-align:center;"&gt;
+  &lt;img src="アイコンURL" alt="アイコン" style="width:60px;height:60px;border-radius:50%;margin-bottom:8px;"&gt;
+  &lt;div class="card-title"&gt;山田 太郎&lt;/div&gt;
+  &lt;div class="card-desc"&gt;Webデザイナー&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>ラベル付きカード</h2>
+      <div class="sample">
+        <div class="card">
+          <span style="display:inline-block;background:#ff6ec4;color:#fff;padding:2px 10px;border-radius:12px;font-size:0.95em;margin-bottom:8px;">NEW</span>
+          <div class="card-title">ラベル付き</div>
+          <div class="card-desc">ラベルやタグを付けられるカード。</div>
+        </div>
+      </div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;div class="card"&gt;
+  &lt;span style="display:inline-block;background:#ff6ec4;color:#fff;padding:2px 10px;border-radius:12px;font-size:0.95em;margin-bottom:8px;"&gt;NEW&lt;/span&gt;
+  &lt;div class="card-title"&gt;ラベル付き&lt;/div&gt;
+  &lt;div class="card-desc"&gt;ラベルやタグを付けられるカード。&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>グラデーションカード</h2>
+      <div class="sample">
+        <div class="card" style="background:linear-gradient(120deg,#4f8cff 60%,#ff6ec4 100%);color:#fff;">
+          <div class="card-title">グラデーション</div>
+          <div class="card-desc">背景がグラデーションのカード。</div>
+        </div>
+      </div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;div class="card" style="background:linear-gradient(120deg,#4f8cff 60%,#ff6ec4 100%);color:#fff;"&gt;
+  &lt;div class="card-title"&gt;グラデーション&lt;/div&gt;
+  &lt;div class="card-desc"&gt;背景がグラデーションのカード。&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>ホバーアニメーションカード</h2>
+      <div class="sample">
+        <div class="card card-hover">
+          <div class="card-title">ホバーアニメ</div>
+          <div class="card-desc">ホバーで拡大＆シャドウ強調。</div>
+        </div>
+      </div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;div class="card card-hover"&gt;
+  &lt;div class="card-title"&gt;ホバーアニメ&lt;/div&gt;
+  &lt;div class="card-desc"&gt;ホバーで拡大＆シャドウ強調。&lt;/div&gt;
+&lt;/div&gt;
+.card-hover:hover {
+  transform: scale(1.07) rotate(-1deg);
+  box-shadow: 0 12px 32px #ff6ec488;
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>通知カード</h2>
+      <div class="sample">
+        <div class="card" style="border-left:6px solid #4f8cff;">
+          <div class="card-title">お知らせ</div>
+          <div class="card-desc">新しいアップデートがあります。</div>
+        </div>
+      </div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;div class="card" style="border-left:6px solid #4f8cff;"&gt;
+  &lt;div class="card-title"&gt;お知らせ&lt;/div&gt;
+  &lt;div class="card-desc"&gt;新しいアップデートがあります。&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>ボーダーカード</h2>
+      <div class="sample">
+        <div class="card" style="border:2px dashed #ff6ec4;">
+          <div class="card-title">ボーダーカード</div>
+          <div class="card-desc">点線枠のカードデザイン。</div>
+        </div>
+      </div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;div class="card" style="border:2px dashed #ff6ec4;"&gt;
+  &lt;div class="card-title"&gt;ボーダーカード&lt;/div&gt;
+  &lt;div class="card-desc"&gt;点線枠のカードデザイン。&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>アイコン付きカード</h2>
+      <div class="sample">
+        <div class="card" style="flex-direction:row;align-items:center;gap:16px;">
+          <span style="font-size:2em;color:#4f8cff;">★</span>
+          <div>
+            <div class="card-title">アイコン付き</div>
+            <div class="card-desc">アイコンとテキストの組み合わせ。</div>
+          </div>
+        </div>
+      </div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;div class="card" style="flex-direction:row;align-items:center;gap:16px;"&gt;
+  &lt;span style="font-size:2em;color:#4f8cff;"&gt;★&lt;/span&gt;
+  &lt;div&gt;
+    &lt;div class="card-title"&gt;アイコン付き&lt;/div&gt;
+    &lt;div class="card-desc"&gt;アイコンとテキストの組み合わせ。&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+  </div>
+  <script>
+    function copyCode(btn) {
+      const code = btn.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'コピー済み!';
+      setTimeout(() => btn.textContent = 'コピー', 1200);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSSボタン チートシート</title>
+  <style>
+    body { font-family: sans-serif; background: #f7f7f7; margin: 0; padding: 0; }
+    .container { max-width: 700px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px #0001; padding: 32px; }
+    h1 { text-align: center; }
+    .cheat-block { margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 32px; }
+    .sample { margin: 16px 0; padding: 24px; background: #f0f4ff; border-radius: 8px; display: flex; align-items: center; justify-content: center; min-height: 60px; }
+    pre { background: #222; color: #fff; padding: 16px; border-radius: 8px; overflow-x: auto; position: relative; }
+    button.copy-btn { position: absolute; top: 8px; right: 8px; background: #4f8cff; color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-size: 0.9em; }
+    button.copy-btn:hover { background: #2563eb; }
+    .back-link { display: inline-block; margin-bottom: 24px; color: #4f8cff; text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+    .btn {
+      background: #4f8cff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 32px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn:hover {
+      background: #2563eb;
+      transform: translateY(-2px) scale(1.04);
+    }
+    .btn-outline {
+      background: #fff;
+      color: #4f8cff;
+      border: 2px solid #4f8cff;
+      border-radius: 6px;
+      padding: 12px 32px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-outline:hover {
+      background: #4f8cff;
+      color: #fff;
+    }
+    .btn-shadow {
+      background: #ff6ec4;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 32px;
+      font-size: 1.1em;
+      box-shadow: 0 4px 16px #ff6ec488;
+      cursor: pointer;
+      transition: box-shadow 0.2s, background 0.2s;
+    }
+    .btn-shadow:hover {
+      background: #ff3e9e;
+      box-shadow: 0 8px 24px #ff6ec4aa;
+    }
+    .btn-gradient {
+      background: linear-gradient(90deg, #4f8cff, #ff6ec4);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 32px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-gradient:hover {
+      opacity: 0.8;
+    }
+    .btn-icon {
+      background: #fff;
+      color: #4f8cff;
+      border: 2px solid #4f8cff;
+      border-radius: 6px;
+      padding: 12px 32px 12px 24px;
+      font-size: 1.1em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-icon:hover {
+      background: #4f8cff;
+      color: #fff;
+    }
+    .btn-round {
+      background: #4f8cff;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 1.5em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-round:hover {
+      background: #2563eb;
+    }
+    .btn-rainbow {
+      background: linear-gradient(90deg, #ff6ec4, #4f8cff, #6effc4, #ffe66e);
+      color: #fff;
+      border: none;
+      border-radius: 24px;
+      padding: 12px 36px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: filter 0.2s;
+    }
+    .btn-rainbow:hover {
+      filter: brightness(1.2) saturate(1.4);
+    }
+    .btn-neon {
+      background: #222;
+      color: #fff;
+      border: 2px solid #4f8cff;
+      border-radius: 8px;
+      padding: 12px 36px;
+      font-size: 1.1em;
+      box-shadow: 0 0 8px #4f8cff, 0 0 24px #ff6ec4;
+      text-shadow: 0 0 8px #4f8cff, 0 0 24px #ff6ec4;
+      cursor: pointer;
+      transition: box-shadow 0.2s;
+    }
+    .btn-neon:hover {
+      box-shadow: 0 0 32px #ff6ec4, 0 0 64px #4f8cff;
+    }
+    .btn-glass {
+      background: rgba(255,255,255,0.2);
+      color: #4f8cff;
+      border: 1.5px solid #4f8cff88;
+      border-radius: 12px;
+      padding: 12px 36px;
+      font-size: 1.1em;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 2px 12px #4f8cff22;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-glass:hover {
+      background: rgba(79,140,255,0.15);
+      color: #2563eb;
+    }
+    .btn-float {
+      background: #fff;
+      color: #4f8cff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 36px;
+      font-size: 1.1em;
+      box-shadow: 0 4px 16px #4f8cff33;
+      cursor: pointer;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .btn-float:hover {
+      box-shadow: 0 8px 32px #4f8cff55;
+      transform: translateY(-4px) scale(1.04);
+    }
+    .btn-slide {
+      background: #fff;
+      color: #4f8cff;
+      border: 2px solid #4f8cff;
+      border-radius: 8px;
+      padding: 12px 36px;
+      font-size: 1.1em;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .btn-slide span {
+      position: relative;
+      z-index: 2;
+    }
+    .btn-slide::before {
+      content: '';
+      position: absolute;
+      left: -100%; top: 0;
+      width: 100%; height: 100%;
+      background: #4f8cff;
+      z-index: 1;
+      transition: left 0.3s;
+    }
+    .btn-slide:hover {
+      color: #fff;
+    }
+    .btn-slide:hover::before {
+      left: 0;
+    }
+    .btn-grad-outline {
+      background: #fff;
+      color: #4f8cff;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      padding: 12px 36px;
+      font-size: 1.1em;
+      background-image: linear-gradient(#fff, #fff), linear-gradient(90deg, #4f8cff, #ff6ec4);
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-grad-outline:hover {
+      color: #ff6ec4;
+      border-color: #ff6ec4;
+    }
+    .btn-dot {
+      background: #fff;
+      color: #4f8cff;
+      border: 2px dashed #4f8cff;
+      border-radius: 50px;
+      padding: 12px 36px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-dot:hover {
+      background: #4f8cff;
+      color: #fff;
+    }
+    .btn-pulse {
+      background: #4f8cff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 36px;
+      font-size: 1.1em;
+      cursor: pointer;
+      box-shadow: 0 0 0 0 #4f8cff88;
+      animation: pulse 1.2s infinite;
+      transition: box-shadow 0.2s;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 #4f8cff88; }
+      70% { box-shadow: 0 0 0 16px #4f8cff00; }
+      100% { box-shadow: 0 0 0 0 #4f8cff00; }
+    }
+    .btn-icon-round {
+      background: #fff;
+      color: #ff6ec4;
+      border: 2px solid #ff6ec4;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 1.5em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-icon-round:hover {
+      background: #ff6ec4;
+      color: #fff;
+    }
+    .btn-glow {
+      background: #4f8cff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 36px;
+      font-size: 1.1em;
+      cursor: pointer;
+      box-shadow: 0 0 8px #4f8cff, 0 0 24px #ff6ec4;
+      transition: box-shadow 0.2s;
+    }
+    .btn-glow:hover {
+      box-shadow: 0 0 32px #ff6ec4, 0 0 64px #4f8cff;
+    }
+
+    .btn-3d {
+      background: linear-gradient(180deg, #4f8cff 60%, #2563eb 100%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 38px;
+      font-size: 1.1em;
+      box-shadow: 0 6px 0 #2563eb, 0 8px 24px #4f8cff44;
+      cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.1s;
+    }
+    .btn-3d:active {
+      transform: translateY(6px);
+      box-shadow: 0 0px 0 #2563eb, 0 2px 8px #4f8cff44;
+    }
+    .btn-ripple {
+      position: relative;
+      overflow: hidden;
+      background: #fff;
+      color: #4f8cff;
+      border: 2px solid #4f8cff;
+      border-radius: 8px;
+      padding: 12px 36px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-ripple:hover {
+      background: #4f8cff;
+      color: #fff;
+    }
+    .btn-ripple .ripple {
+      position: absolute;
+      border-radius: 50%;
+      transform: scale(0);
+      animation: ripple 0.6s linear;
+      background: rgba(79,140,255,0.4);
+      pointer-events: none;
+    }
+    @keyframes ripple {
+      to {
+        transform: scale(3);
+        opacity: 0;
+      }
+    }
+    .btn-ribbon {
+      position: relative;
+      background: #ff6ec4;
+      color: #fff;
+      border: none;
+      border-radius: 8px 8px 8px 8px;
+      padding: 12px 36px 12px 48px;
+      font-size: 1.1em;
+      cursor: pointer;
+      overflow: visible;
+    }
+    .btn-ribbon .ribbon {
+      position: absolute;
+      left: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 28px; height: 28px;
+      background: #ffe66e;
+      border-radius: 8px 0 0 8px;
+      box-shadow: 0 2px 8px #ff6ec422;
+    }
+    .btn-tag {
+      background: #fff;
+      color: #ff6ec4;
+      border: 2px solid #ff6ec4;
+      border-radius: 24px 24px 24px 4px;
+      padding: 12px 36px 12px 28px;
+      font-size: 1.1em;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-tag::before {
+      content: '';
+      position: absolute;
+      left: 12px; top: 50%;
+      transform: translateY(-50%);
+      width: 8px; height: 8px;
+      background: #ff6ec4;
+      border-radius: 50%;
+    }
+    .btn-tag:hover {
+      background: #ff6ec4;
+      color: #fff;
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 54px;
+      height: 30px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: #ccc;
+      border-radius: 30px;
+      transition: .3s;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 22px;
+      width: 22px;
+      left: 4px;
+      bottom: 4px;
+      background: #fff;
+      border-radius: 50%;
+      transition: .3s;
+    }
+    .switch input:checked + .slider {
+      background: #4f8cff;
+    }
+    .switch input:checked + .slider:before {
+      transform: translateX(24px);
+    }
+    .btn-badge {
+      position: relative;
+      background: #4f8cff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 36px;
+      font-size: 1.1em;
+      cursor: pointer;
+    }
+    .btn-badge .badge {
+      position: absolute;
+      top: 6px; right: 16px;
+      background: #ff6ec4;
+      color: #fff;
+      border-radius: 50%;
+      padding: 2px 8px;
+      font-size: 0.9em;
+      font-weight: bold;
+      box-shadow: 0 2px 8px #ff6ec422;
+    }
+    .btn-toggle {
+      background: #fff;
+      color: #4f8cff;
+      border: 2px solid #4f8cff;
+      border-radius: 8px;
+      padding: 12px 36px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-toggle.active {
+      background: #4f8cff;
+      color: #fff;
+    }
+    .btn-lift {
+      background: #fff;
+      color: #4f8cff;
+      border: 2px solid #4f8cff;
+      border-radius: 8px;
+      padding: 12px 36px;
+      font-size: 1.1em;
+      box-shadow: 0 2px 8px #4f8cff22;
+      cursor: pointer;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .btn-lift:hover {
+      box-shadow: 0 12px 32px #4f8cff44;
+      transform: translateY(-8px) scale(1.06);
+    }
+    .btn-shine {
+      position: relative;
+      background: #4f8cff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 36px;
+      font-size: 1.1em;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .btn-shine span {
+      position: relative;
+      z-index: 2;
+    }
+    .btn-shine::before {
+      content: '';
+      position: absolute;
+      left: -60%;
+      top: 0;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(120deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0.2) 100%);
+      transform: skewX(-20deg);
+      z-index: 1;
+      transition: left 0.5s;
+    }
+    .btn-shine:hover::before {
+      left: 110%;
+    }
+    .btn-sticker {
+      background: #ffe66e;
+      color: #ff6ec4;
+      border: 2px dashed #ff6ec4;
+      border-radius: 16px 4px 16px 4px;
+      padding: 12px 36px;
+      font-size: 1.1em;
+      box-shadow: 0 2px 8px #ff6ec422;
+      cursor: pointer;
+      position: relative;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .btn-sticker:hover {
+      box-shadow: 0 8px 24px #ff6ec488;
+      transform: rotate(-2deg) scale(1.04);
+    }
+    /* ここまで追加：jajaaan風多彩ボタン */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Hubに戻る</a>
+    <h1>CSSボタン チートシート</h1>
+    <div class="cheat-block">
+      <h2>シンプルなボタン</h2>
+      <div class="sample"><button class="btn">Button</button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn {
+  background: #4f8cff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 32px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.btn:hover {
+  background: #2563eb;
+  transform: translateY(-2px) scale(1.04);
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>アウトラインボタン</h2>
+      <div class="sample"><button class="btn-outline">Outline</button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn-outline {
+  background: #fff;
+  color: #4f8cff;
+  border: 2px solid #4f8cff;
+  border-radius: 6px;
+  padding: 12px 32px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-outline:hover {
+  background: #4f8cff;
+  color: #fff;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>シャドウ付きボタン</h2>
+      <div class="sample"><button class="btn-shadow">Shadow</button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn-shadow {
+  background: #ff6ec4;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 32px;
+  font-size: 1.1em;
+  box-shadow: 0 4px 16px #ff6ec488;
+  cursor: pointer;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+.btn-shadow:hover {
+  background: #ff3e9e;
+  box-shadow: 0 8px 24px #ff6ec4aa;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>グラデーションボタン</h2>
+      <div class="sample"><button class="btn-gradient">Gradient</button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn-gradient {
+  background: linear-gradient(90deg, #4f8cff, #ff6ec4);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 32px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.btn-gradient:hover {
+  opacity: 0.8;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>アイコン付きボタン</h2>
+      <div class="sample"><button class="btn-icon">🔍 検索</button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn-icon {
+  background: #fff;
+  color: #4f8cff;
+  border: 2px solid #4f8cff;
+  border-radius: 6px;
+  padding: 12px 32px 12px 24px;
+  font-size: 1.1em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-icon:hover {
+  background: #4f8cff;
+  color: #fff;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>丸型ボタン</h2>
+      <div class="sample"><button class="btn-round">＋</button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn-round {
+  background: #4f8cff;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 1.5em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-round:hover {
+  background: #2563eb;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>レインボーボタン</h2>
+      <div class="sample"><button class="btn-rainbow">Rainbow</button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn-rainbow {
+  background: linear-gradient(90deg, #ff6ec4, #4f8cff, #6effc4, #ffe66e);
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 12px 36px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: filter 0.2s;
+}
+.btn-rainbow:hover {
+  filter: brightness(1.2) saturate(1.4);
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>ネオンボタン</h2>
+      <div class="sample"><button class="btn-neon">Neon</button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn-neon {
+  background: #222;
+  color: #fff;
+  border: 2px solid #4f8cff;
+  border-radius: 8px;
+  padding: 12px 36px;
+  font-size: 1.1em;
+  box-shadow: 0 0 8px #4f8cff, 0 0 24px #ff6ec4;
+  text-shadow: 0 0 8px #4f8cff, 0 0 24px #ff6ec4;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+.btn-neon:hover {
+  box-shadow: 0 0 32px #ff6ec4, 0 0 64px #4f8cff;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>グラスボタン</h2>
+      <div class="sample"><button class="btn-glass">Glass</button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn-glass {
+  background: rgba(255,255,255,0.2);
+  color: #4f8cff;
+  border: 1.5px solid #4f8cff88;
+  border-radius: 12px;
+  padding: 12px 36px;
+  font-size: 1.1em;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 12px #4f8cff22;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-glass:hover {
+  background: rgba(79,140,255,0.15);
+  color: #2563eb;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>シャドウ浮きボタン</h2>
+      <div class="sample"><button class="btn-float">Float</button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn-float {
+  background: #fff;
+  color: #4f8cff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 36px;
+  font-size: 1.1em;
+  box-shadow: 0 4px 16px #4f8cff33;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.btn-float:hover {
+  box-shadow: 0 8px 32px #4f8cff55;
+  transform: translateY(-4px) scale(1.04);
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>スライドボタン</h2>
+      <div class="sample"><button class="btn-slide"><span>Slide</span></button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn-slide {
+  background: #fff;
+  color: #4f8cff;
+  border: 2px solid #4f8cff;
+  border-radius: 8px;
+  padding: 12px 36px;
+  font-size: 1.1em;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.btn-slide span {
+  position: relative;
+  z-index: 2;
+}
+.btn-slide::before {
+  content: '';
+  position: absolute;
+  left: -100%; top: 0;
+  width: 100%; height: 100%;
+  background: #4f8cff;
+  z-index: 1;
+  transition: left 0.3s;
+}
+.btn-slide:hover {
+  color: #fff;
+}
+.btn-slide:hover::before {
+  left: 0;
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>グラデーション枠ボタン</h2>
+      <div class="sample"><button class="btn-grad-outline">Grad Outline</button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn-grad-outline {
+  background: #fff;
+  color: #4f8cff;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 12px 36px;
+  font-size: 1.1em;
+  background-image: linear-gradient(#fff, #fff), linear-gradient(90deg, #4f8cff, #ff6ec4);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.btn-grad-outline:hover {
+  color: #ff6ec4;
+  border-color: #ff6ec4;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>ドットボタン</h2>
+      <div class="sample"><button class="btn-dot">● Dot</button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn-dot {
+  background: #fff;
+  color: #4f8cff;
+  border: 2px dashed #4f8cff;
+  border-radius: 50px;
+  padding: 12px 36px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-dot:hover {
+  background: #4f8cff;
+  color: #fff;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>パルスボタン</h2>
+      <div class="sample"><button class="btn-pulse">Pulse</button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn-pulse {
+  background: #4f8cff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 36px;
+  font-size: 1.1em;
+  cursor: pointer;
+  box-shadow: 0 0 0 0 #4f8cff88;
+  animation: pulse 1.2s infinite;
+  transition: box-shadow 0.2s;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 #4f8cff88; }
+  70% { box-shadow: 0 0 0 16px #4f8cff00; }
+  100% { box-shadow: 0 0 0 0 #4f8cff00; }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>アイコンラウンドボタン</h2>
+      <div class="sample"><button class="btn-icon-round">★</button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn-icon-round {
+  background: #fff;
+  color: #ff6ec4;
+  border: 2px solid #ff6ec4;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-icon-round:hover {
+  background: #ff6ec4;
+  color: #fff;
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>グローイングボタン</h2>
+      <div class="sample"><button class="btn-glow">Glow</button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn-glow {
+  background: #4f8cff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 36px;
+  font-size: 1.1em;
+  cursor: pointer;
+  box-shadow: 0 0 8px #4f8cff, 0 0 24px #ff6ec4;
+  transition: box-shadow 0.2s;
+}
+.btn-glow:hover {
+  box-shadow: 0 0 32px #ff6ec4, 0 0 64px #4f8cff;
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>3D押し込みボタン</h2>
+      <div class="sample"><button class="btn-3d">3D Push</button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn-3d {
+  background: linear-gradient(180deg, #4f8cff 60%, #2563eb 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 38px;
+  font-size: 1.1em;
+  box-shadow: 0 6px 0 #2563eb, 0 8px 24px #4f8cff44;
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.btn-3d:active {
+  transform: translateY(6px);
+  box-shadow: 0 0px 0 #2563eb, 0 2px 8px #4f8cff44;
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>波紋エフェクトボタン</h2>
+      <div class="sample"><button class="btn-ripple" onclick="rippleEffect(event)">Ripple</button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn-ripple {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  color: #4f8cff;
+  border: 2px solid #4f8cff;
+  border-radius: 8px;
+  padding: 12px 36px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-ripple:hover {
+  background: #4f8cff;
+  color: #fff;
+}
+.btn-ripple .ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+  background: rgba(79,140,255,0.4);
+  pointer-events: none;
+}
+@keyframes ripple {
+  to {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>リボンボタン</h2>
+      <div class="sample"><button class="btn-ribbon">Ribbon<span class="ribbon"></span></button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn-ribbon {
+  position: relative;
+  background: #ff6ec4;
+  color: #fff;
+  border: none;
+  border-radius: 8px 8px 8px 8px;
+  padding: 12px 36px 12px 48px;
+  font-size: 1.1em;
+  cursor: pointer;
+  overflow: visible;
+}
+.btn-ribbon .ribbon {
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 28px; height: 28px;
+  background: #ffe66e;
+  border-radius: 8px 0 0 8px;
+  box-shadow: 0 2px 8px #ff6ec422;
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>タグ風ボタン</h2>
+      <div class="sample"><button class="btn-tag">#Tag</button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn-tag {
+  background: #fff;
+  color: #ff6ec4;
+  border: 2px solid #ff6ec4;
+  border-radius: 24px 24px 24px 4px;
+  padding: 12px 36px 12px 28px;
+  font-size: 1.1em;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-tag::before {
+  content: '';
+  position: absolute;
+  left: 12px; top: 50%;
+  transform: translateY(-50%);
+  width: 8px; height: 8px;
+  background: #ff6ec4;
+  border-radius: 50%;
+}
+.btn-tag:hover {
+  background: #ff6ec4;
+  color: #fff;
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>スイッチボタン</h2>
+      <div class="sample"><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.switch {
+  position: relative;
+  display: inline-block;
+  width: 54px;
+  height: 30px;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: #ccc;
+  border-radius: 30px;
+  transition: .3s;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background: #fff;
+  border-radius: 50%;
+  transition: .3s;
+}
+.switch input:checked + .slider {
+  background: #4f8cff;
+}
+.switch input:checked + .slider:before {
+  transform: translateX(24px);
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>バッジ付きボタン</h2>
+      <div class="sample"><button class="btn-badge">通知<span class="badge">5</span></button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn-badge {
+  position: relative;
+  background: #4f8cff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 36px;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+.btn-badge .badge {
+  position: absolute;
+  top: 6px; right: 16px;
+  background: #ff6ec4;
+  color: #fff;
+  border-radius: 50%;
+  padding: 2px 8px;
+  font-size: 0.9em;
+  font-weight: bold;
+  box-shadow: 0 2px 8px #ff6ec422;
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>トグルボタン</h2>
+      <div class="sample"><button class="btn-toggle" onclick="toggleActive(this)">Toggle</button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn-toggle {
+  background: #fff;
+  color: #4f8cff;
+  border: 2px solid #4f8cff;
+  border-radius: 8px;
+  padding: 12px 36px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-toggle.active {
+  background: #4f8cff;
+  color: #fff;
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>リフトアップボタン</h2>
+      <div class="sample"><button class="btn-lift">Lift Up</button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn-lift {
+  background: #fff;
+  color: #4f8cff;
+  border: 2px solid #4f8cff;
+  border-radius: 8px;
+  padding: 12px 36px;
+  font-size: 1.1em;
+  box-shadow: 0 2px 8px #4f8cff22;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.btn-lift:hover {
+  box-shadow: 0 12px 32px #4f8cff44;
+  transform: translateY(-8px) scale(1.06);
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>シャイン（光沢）ボタン</h2>
+      <div class="sample"><button class="btn-shine"><span>Shine</span></button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn-shine {
+  position: relative;
+  background: #4f8cff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 36px;
+  font-size: 1.1em;
+  overflow: hidden;
+  cursor: pointer;
+}
+.btn-shine span {
+  position: relative;
+  z-index: 2;
+}
+.btn-shine::before {
+  content: '';
+  position: absolute;
+  left: -60%;
+  top: 0;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0.2) 100%);
+  transform: skewX(-20deg);
+  z-index: 1;
+  transition: left 0.5s;
+}
+.btn-shine:hover::before {
+  left: 110%;
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>ステッカーボタン</h2>
+      <div class="sample"><button class="btn-sticker">Sticker!</button></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.btn-sticker {
+  background: #ffe66e;
+  color: #ff6ec4;
+  border: 2px dashed #ff6ec4;
+  border-radius: 16px 4px 16px 4px;
+  padding: 12px 36px;
+  font-size: 1.1em;
+  box-shadow: 0 2px 8px #ff6ec422;
+  cursor: pointer;
+  position: relative;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.btn-sticker:hover {
+  box-shadow: 0 8px 24px #ff6ec488;
+  transform: rotate(-2deg) scale(1.04);
+}
+</code></pre>
+    </div>
+  </div>
+  <script>
+    function copyCode(btn) {
+      const code = btn.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'コピー済み!';
+      setTimeout(() => btn.textContent = 'コピー', 1200);
+    }
+
+    // 波紋エフェクト用
+    function rippleEffect(e) {
+      const btn = e.currentTarget;
+      const circle = document.createElement('span');
+      circle.classList.add('ripple');
+      const rect = btn.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      circle.style.width = circle.style.height = size + 'px';
+      circle.style.left = (e.clientX - rect.left - size/2) + 'px';
+      circle.style.top = (e.clientY - rect.top - size/2) + 'px';
+      btn.appendChild(circle);
+      circle.addEventListener('animationend', () => circle.remove());
+    }
+
+    // トグルボタン用
+    function toggleActive(btn) {
+      btn.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

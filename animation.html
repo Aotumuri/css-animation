@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSSアニメーション チートシート</title>
+  <style>
+    body { font-family: sans-serif; background: #f7f7f7; margin: 0; padding: 0; }
+    .container { max-width: 700px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px #0001; padding: 32px; }
+    h1 { text-align: center; }
+    .cheat-block { margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 32px; }
+    .sample { margin: 16px 0; padding: 24px; background: #f0f4ff; border-radius: 8px; display: flex; align-items: center; justify-content: center; min-height: 60px; }
+    pre { background: #222; color: #fff; padding: 16px; border-radius: 8px; overflow-x: auto; position: relative; }
+    button.copy-btn { position: absolute; top: 8px; right: 8px; background: #4f8cff; color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-size: 0.9em; }
+    button.copy-btn:hover { background: #2563eb; }
+    .back-link { display: inline-block; margin-bottom: 24px; color: #4f8cff; text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-30px); }
+    }
+    .bounce {
+      display: inline-block;
+      animation: bounce 1s infinite;
+      font-size: 2em;
+    }
+    @keyframes fadein {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .fadein {
+      animation: fadein 2s ease-in;
+      font-size: 2em;
+    }
+    @keyframes slidein {
+      from { transform: translateX(-100px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    .slidein {
+      display: inline-block;
+      animation: slidein 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .rotate {
+      display: inline-block;
+      animation: rotate 1.2s linear infinite;
+    }
+    @keyframes scale {
+      from { transform: scale(1); }
+      to { transform: scale(1.3); }
+    }
+    .scale {
+      display: inline-block;
+      animation: scale 1s infinite alternate;
+    }
+    @keyframes blink {
+      to { visibility: hidden; }
+    }
+    .blink {
+      animation: blink 1s steps(2, start) infinite;
+    }
+    .see-btn {
+      margin-left: 12px;
+      background: #fff;
+      color: #4f8cff;
+      border: 1px solid #4f8cff;
+      border-radius: 4px;
+      padding: 2px 12px;
+      font-size: 0.95em;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .see-btn:hover {
+      background: #4f8cff;
+      color: #fff;
+    }
+    .outline-appear {
+      position: relative;
+      display: inline-block;
+    }
+    .outline-appear::after {
+      content: '';
+      position: absolute;
+      left: -12px; top: -8px;
+      width: calc(100% + 24px);
+      height: calc(100% + 16px);
+      border: 3px solid #4f8cff;
+      border-radius: 12px;
+      box-sizing: border-box;
+      pointer-events: none;
+      opacity: 0;
+      transform: scaleX(0);
+      transition: none;
+    }
+    .outline-appear.animate::after {
+      animation: outline-appear-anim 0.7s cubic-bezier(.4,1.6,.6,1) forwards;
+    }
+    @keyframes outline-appear-anim {
+      0% {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+      30% {
+        opacity: 1;
+        transform: scaleX(0.2);
+      }
+      100% {
+        opacity: 1;
+        transform: scaleX(1);
+      }
+    }
+    .typewriter {
+      display: inline-block;
+      overflow: hidden;
+      border-right: .15em solid #4f8cff;
+      white-space: nowrap;
+      animation: typewriter 2.5s steps(18) 1 normal both, blink-caret .75s step-end infinite;
+    }
+    @keyframes typewriter {
+      from { width: 0; }
+      to { width: 13.5em; }
+    }
+    @keyframes blink-caret {
+      from, to { border-color: transparent; }
+      50% { border-color: #4f8cff; }
+    }
+    .zoom-in {
+      display: inline-block;
+      animation: zoom-in 0.7s cubic-bezier(.4,1.6,.6,1) both;
+    }
+    @keyframes zoom-in {
+      from { transform: scale(0.2); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .flash {
+      animation: flash 1s linear 1;
+    }
+    @keyframes flash {
+      0%, 100% { opacity: 1; }
+      25%, 75% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+    .smoke {
+      display: inline-block;
+      animation: smoke 1.2s ease-out 1;
+    }
+    @keyframes smoke {
+      0% { opacity: 0; filter: blur(8px); transform: translateY(30px) scale(0.8); }
+      60% { opacity: 1; filter: blur(0); }
+      100% { opacity: 1; filter: blur(0); transform: translateY(0) scale(1); }
+    }
+    .slide-up {
+      display: inline-block;
+      animation: slide-up 0.8s cubic-bezier(.4,1.6,.6,1) both;
+    }
+    @keyframes slide-up {
+      from { transform: translateY(60px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .fade-zoom {
+      display: inline-block;
+      animation: fade-zoom 1s cubic-bezier(.4,1.6,.6,1) both;
+    }
+    @keyframes fade-zoom {
+      0% { opacity: 0; transform: scale(0.5); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .glitch {
+      position: relative;
+      color: #fff;
+      background: #222;
+      display: inline-block;
+      animation: glitch 0.7s linear both;
+    }
+    .glitch::before, .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0; top: 0;
+      width: 100%;
+      overflow: hidden;
+      color: #4f8cff;
+      z-index: 1;
+    }
+    .glitch::after {
+      color: #ff6ec4;
+      z-index: 2;
+    }
+    @keyframes glitch {
+      0% { transform: none; }
+      20% { transform: skew(-5deg); }
+      40% { transform: skew(5deg); }
+      60% { transform: translate(-2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+      100% { transform: none; }
+    }
+    .ripple {
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+    }
+    .ripple::after {
+      content: '';
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 0; height: 0;
+      background: rgba(79,140,255,0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      animation: ripple 0.7s linear;
+    }
+    @keyframes ripple {
+      to {
+        width: 200px;
+        height: 200px;
+        opacity: 0;
+      }
+    }
+    .shadow-pop {
+      display: inline-block;
+      animation: shadow-pop 0.7s cubic-bezier(.4,1.6,.6,1) both;
+    }
+    @keyframes shadow-pop {
+      0% { text-shadow: none; transform: scale(0.8); opacity: 0; }
+      60% { text-shadow: 0 8px 32px #4f8cff88; opacity: 1; }
+      100% { text-shadow: 0 2px 8px #4f8cff88; transform: scale(1); }
+    }
+    .color-flip {
+      display: inline-block;
+      animation: color-flip 1s cubic-bezier(.4,1.6,.6,1) both;
+    }
+    @keyframes color-flip {
+      0% { color: #222; background: #fff; }
+      50% { color: #fff; background: #4f8cff; }
+      100% { color: #222; background: #fff; }
+    }
+    .rainbow-glow {
+      display: inline-block;
+      color: #fff;
+      animation: rainbow-glow 2s linear infinite;
+    }
+    @keyframes rainbow-glow {
+      0% { text-shadow: 0 0 8px #ff6ec4, 0 0 16px #4f8cff; color: #ff6ec4; }
+      25% { text-shadow: 0 0 8px #4f8cff, 0 0 16px #6effc4; color: #4f8cff; }
+      50% { text-shadow: 0 0 8px #6effc4, 0 0 16px #ffe66e; color: #6effc4; }
+      75% { text-shadow: 0 0 8px #ffe66e, 0 0 16px #ff6ec4; color: #ffe66e; }
+      100% { text-shadow: 0 0 8px #ff6ec4, 0 0 16px #4f8cff; color: #ff6ec4; }
+    }
+    .jump-3d {
+      display: inline-block;
+      perspective: 400px;
+      animation: jump-3d 1.2s cubic-bezier(.4,1.6,.6,1) both;
+    }
+    @keyframes jump-3d {
+      0% { transform: rotateX(90deg) scale(0.2); opacity: 0; }
+      60% { transform: rotateX(-10deg) scale(1.1); opacity: 1; }
+      100% { transform: rotateX(0deg) scale(1); opacity: 1; }
+    }
+    .fire-effect {
+      display: inline-block;
+      color: #fff;
+      text-shadow: 0 0 8px #ff6e00, 0 0 24px #ff3e00, 0 0 48px #ff0000;
+      animation: fire-effect 1.2s infinite alternate;
+    }
+    @keyframes fire-effect {
+      0% { text-shadow: 0 0 8px #ff6e00, 0 0 24px #ff3e00, 0 0 48px #ff0000; }
+      50% { text-shadow: 0 0 24px #ff6e00, 0 0 48px #ff3e00, 0 0 96px #ff0000; }
+      100% { text-shadow: 0 0 8px #ff6e00, 0 0 24px #ff3e00, 0 0 48px #ff0000; }
+    }
+    .spark {
+      display: inline-block;
+      position: relative;
+      animation: spark 1s linear both;
+    }
+    .spark::after {
+      content: '✨';
+      position: absolute;
+      left: 100%; top: 0;
+      opacity: 0;
+      animation: spark-after 1s linear both;
+    }
+    @keyframes spark {
+      0% { color: #fff; }
+      50% { color: #ffe66e; }
+      100% { color: #fff; }
+    }
+    @keyframes spark-after {
+      0% { opacity: 0; left: 100%; }
+      40% { opacity: 1; left: 110%; }
+      100% { opacity: 0; left: 120%; }
+    }
+    .explode {
+      display: inline-block;
+      animation: explode 0.7s cubic-bezier(.4,1.6,.6,1) both;
+    }
+    @keyframes explode {
+      0% { letter-spacing: 0; opacity: 1; transform: scale(1); }
+      60% { letter-spacing: 0.5em; opacity: 1; transform: scale(1.3); }
+      100% { letter-spacing: 1em; opacity: 0; transform: scale(2); }
+    }
+    .neon {
+      display: inline-block;
+      color: #fff;
+      text-shadow: 0 0 8px #4f8cff, 0 0 24px #4f8cff, 0 0 48px #ff6ec4;
+      animation: neon 1.2s alternate infinite;
+    }
+    @keyframes neon {
+      0% { text-shadow: 0 0 8px #4f8cff, 0 0 24px #4f8cff, 0 0 48px #ff6ec4; }
+      50% { text-shadow: 0 0 32px #ff6ec4, 0 0 64px #4f8cff, 0 0 128px #fff; }
+      100% { text-shadow: 0 0 8px #4f8cff, 0 0 24px #4f8cff, 0 0 48px #ff6ec4; }
+    }
+    .wave {
+      display: inline-block;
+      animation: wave 1.2s infinite linear;
+    }
+    @keyframes wave {
+      0% { transform: rotate(0deg); }
+      15% { transform: rotate(14deg); }
+      30% { transform: rotate(-8deg); }
+      40% { transform: rotate(14deg); }
+      50% { transform: rotate(-4deg); }
+      60% { transform: rotate(10deg); }
+      70% { transform: rotate(0deg); }
+      100% { transform: rotate(0deg); }
+    }
+    .shutter {
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+    }
+    .shutter::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: #4f8cff;
+      z-index: 2;
+      animation: shutter 1s cubic-bezier(.4,1.6,.6,1) both;
+    }
+    @keyframes shutter {
+      0% { left: 0; width: 100%; }
+      100% { left: 100%; width: 0; }
+    }
+    .particle {
+      display: inline-block;
+      position: relative;
+      animation: particle 1.2s linear both;
+    }
+    .particle::after {
+      content: '✦';
+      position: absolute;
+      left: 50%; top: 50%;
+      font-size: 2em;
+      color: #ffe66e;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.2);
+      animation: particle-after 1.2s linear both;
+    }
+    @keyframes particle {
+      0% { opacity: 0; }
+      20% { opacity: 1; }
+      100% { opacity: 1; }
+    }
+    @keyframes particle-after {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.2); }
+      40% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(2); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Hubに戻る</a>
+    <h1>CSSアニメーション チートシート</h1>
+    <div class="cheat-block">
+      <h2>バウンス（bounce）</h2>
+      <div class="sample"><span class="bounce">⬆️</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.bounce {
+  display: inline-block;
+  animation: bounce 1s infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-30px); }
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>回転（rotate）</h2>
+      <div class="sample"><span class="rotate">🔄</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.rotate {
+  display: inline-block;
+  animation: rotate 1.2s linear infinite;
+}
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>フェードイン（fadein）
+        <button class="see-btn" onclick="triggerAnim(this, 'fadein')">見る</button>
+      </h2>
+      <div class="sample"><span class="fadein anim-target">Hello!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.fadein {
+  animation: fadein 2s ease-in;
+}
+@keyframes fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>スライドイン（slidein）
+        <button class="see-btn" onclick="triggerAnim(this, 'slidein')">見る</button>
+      </h2>
+      <div class="sample"><span class="slidein anim-target">→ Slide!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.slidein {
+  display: inline-block;
+  animation: slidein 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+@keyframes slidein {
+  from { transform: translateX(-100px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>拡大縮小（scale）
+        <button class="see-btn" onclick="triggerAnim(this, 'scale')">見る</button>
+      </h2>
+      <div class="sample"><span class="scale anim-target">Zoom!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.scale {
+  display: inline-block;
+  animation: scale 1s infinite alternate;
+}
+@keyframes scale {
+  from { transform: scale(1); }
+  to { transform: scale(1.3); }
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>点滅（blink）</h2>
+      <div class="sample"><span class="blink anim-target">点滅</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.blink {
+  animation: blink 1s steps(2, start) infinite;
+}
+@keyframes blink {
+  to { visibility: hidden; }
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>アウトライン出現（outline-appear）
+        <button class="see-btn" onclick="triggerAnim(this, 'outline-appear')">見る</button>
+      </h2>
+      <div class="sample"><span class="outline-appear anim-target">Outline!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.outline-appear {
+  position: relative;
+  display: inline-block;
+}
+.outline-appear::after {
+  content: '';
+  position: absolute;
+  left: -12px; top: -8px;
+  width: calc(100% + 24px);
+  height: calc(100% + 16px);
+  border: 3px solid #4f8cff;
+  border-radius: 12px;
+  box-sizing: border-box;
+  pointer-events: none;
+  opacity: 0;
+  transform: scaleX(0);
+  transition: none;
+}
+.outline-appear.animate::after {
+  animation: outline-appear-anim 0.7s cubic-bezier(.4,1.6,.6,1) forwards;
+}
+@keyframes outline-appear-anim {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  30% {
+    opacity: 1;
+    transform: scaleX(0.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>タイプライター（typewriter）<button class="see-btn" onclick="triggerAnim(this, 'typewriter')">見る</button></h2>
+      <div class="sample"><span class="typewriter anim-target">Typewriter Effect</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.typewriter {
+  display: inline-block;
+  overflow: hidden;
+  border-right: .15em solid #4f8cff;
+  white-space: nowrap;
+  animation: typewriter 2.5s steps(18) 1 normal both, blink-caret .75s step-end infinite;
+}
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 13.5em; }
+}
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: #4f8cff; }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>ズームイン（zoom-in）<button class="see-btn" onclick="triggerAnim(this, 'zoom-in')">見る</button></h2>
+      <div class="sample"><span class="zoom-in anim-target">Zoom In!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.zoom-in {
+  display: inline-block;
+  animation: zoom-in 0.7s cubic-bezier(.4,1.6,.6,1) both;
+}
+@keyframes zoom-in {
+  from { transform: scale(0.2); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>フラッシュ（flash）<button class="see-btn" onclick="triggerAnim(this, 'flash')">見る</button></h2>
+      <div class="sample"><span class="flash anim-target">Flash!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.flash {
+  animation: flash 1s linear 1;
+}
+@keyframes flash {
+  0%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+  50% { opacity: 1; }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>スモーク（smoke）<button class="see-btn" onclick="triggerAnim(this, 'smoke')">見る</button></h2>
+      <div class="sample"><span class="smoke anim-target">Smoke</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.smoke {
+  display: inline-block;
+  animation: smoke 1.2s ease-out 1;
+}
+@keyframes smoke {
+  0% { opacity: 0; filter: blur(8px); transform: translateY(30px) scale(0.8); }
+  60% { opacity: 1; filter: blur(0); }
+  100% { opacity: 1; filter: blur(0); transform: translateY(0) scale(1); }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>スライドアップ（slide-up）<button class="see-btn" onclick="triggerAnim(this, 'slide-up')">見る</button></h2>
+      <div class="sample"><span class="slide-up anim-target">Slide Up!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.slide-up {
+  display: inline-block;
+  animation: slide-up 0.8s cubic-bezier(.4,1.6,.6,1) both;
+}
+@keyframes slide-up {
+  from { transform: translateY(60px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>フェード＆拡大（fade-zoom）<button class="see-btn" onclick="triggerAnim(this, 'fade-zoom')">見る</button></h2>
+      <div class="sample"><span class="fade-zoom anim-target">Fade Zoom</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.fade-zoom {
+  display: inline-block;
+  animation: fade-zoom 1s cubic-bezier(.4,1.6,.6,1) both;
+}
+@keyframes fade-zoom {
+  0% { opacity: 0; transform: scale(0.5); }
+  100% { opacity: 1; transform: scale(1); }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>グリッチ（glitch）<button class="see-btn" onclick="triggerAnim(this, 'glitch')">見る</button></h2>
+      <div class="sample"><span class="glitch anim-target" data-text="GLITCH">GLITCH</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.glitch {
+  position: relative;
+  color: #fff;
+  background: #222;
+  display: inline-block;
+  animation: glitch 0.7s linear both;
+}
+.glitch::before, .glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%;
+  overflow: hidden;
+  color: #4f8cff;
+  z-index: 1;
+}
+.glitch::after {
+  color: #ff6ec4;
+  z-index: 2;
+}
+@keyframes glitch {
+  0% { transform: none; }
+  20% { transform: skew(-5deg); }
+  40% { transform: skew(5deg); }
+  60% { transform: translate(-2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: none; }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>波紋（ripple）<button class="see-btn" onclick="triggerAnim(this, 'ripple')">見る</button></h2>
+      <div class="sample"><span class="ripple anim-target">Ripple</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.ripple {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+.ripple::after {
+  content: '';
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 0; height: 0;
+  background: rgba(79,140,255,0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: ripple 0.7s linear;
+}
+@keyframes ripple {
+  to {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+  }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>シャドウ拡大（shadow-pop）<button class="see-btn" onclick="triggerAnim(this, 'shadow-pop')">見る</button></h2>
+      <div class="sample"><span class="shadow-pop anim-target">Shadow Pop</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.shadow-pop {
+  display: inline-block;
+  animation: shadow-pop 0.7s cubic-bezier(.4,1.6,.6,1) both;
+}
+@keyframes shadow-pop {
+  0% { text-shadow: none; transform: scale(0.8); opacity: 0; }
+  60% { text-shadow: 0 8px 32px #4f8cff88; opacity: 1; }
+  100% { text-shadow: 0 2px 8px #4f8cff88; transform: scale(1); }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>カラーフリップ（color-flip）<button class="see-btn" onclick="triggerAnim(this, 'color-flip')">見る</button></h2>
+      <div class="sample"><span class="color-flip anim-target" style="display:inline-block;">Color Flip</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.color-flip {
+  display: inline-block;
+  animation: color-flip 1s cubic-bezier(.4,1.6,.6,1) both;
+}
+@keyframes color-flip {
+  0% { color: #222; background: #fff; }
+  50% { color: #fff; background: #4f8cff; }
+  100% { color: #222; background: #fff; }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>レインボーグロー（rainbow-glow）<button class="see-btn" onclick="triggerAnim(this, 'rainbow-glow')">見る</button></h2>
+      <div class="sample"><span class="rainbow-glow anim-target">Rainbow Glow</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.rainbow-glow {
+  display: inline-block;
+  color: #fff;
+  animation: rainbow-glow 2s linear infinite;
+}
+@keyframes rainbow-glow {
+  0% { text-shadow: 0 0 8px #ff6ec4, 0 0 16px #4f8cff; color: #ff6ec4; }
+  25% { text-shadow: 0 0 8px #4f8cff, 0 0 16px #6effc4; color: #4f8cff; }
+  50% { text-shadow: 0 0 8px #6effc4, 0 0 16px #ffe66e; color: #6effc4; }
+  75% { text-shadow: 0 0 8px #ffe66e, 0 0 16px #ff6ec4; color: #ffe66e; }
+  100% { text-shadow: 0 0 8px #ff6ec4, 0 0 16px #4f8cff; color: #ff6ec4; }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>3Dジャンプ（jump-3d）<button class="see-btn" onclick="triggerAnim(this, 'jump-3d')">見る</button></h2>
+      <div class="sample"><span class="jump-3d anim-target">3D Jump!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.jump-3d {
+  display: inline-block;
+  perspective: 400px;
+  animation: jump-3d 1.2s cubic-bezier(.4,1.6,.6,1) both;
+}
+@keyframes jump-3d {
+  0% { transform: rotateX(90deg) scale(0.2); opacity: 0; }
+  60% { transform: rotateX(-10deg) scale(1.1); opacity: 1; }
+  100% { transform: rotateX(0deg) scale(1); opacity: 1; }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>炎エフェクト（fire-effect）<button class="see-btn" onclick="triggerAnim(this, 'fire-effect')">見る</button></h2>
+      <div class="sample"><span class="fire-effect anim-target">FIRE!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.fire-effect {
+  display: inline-block;
+  color: #fff;
+  text-shadow: 0 0 8px #ff6e00, 0 0 24px #ff3e00, 0 0 48px #ff0000;
+  animation: fire-effect 1.2s infinite alternate;
+}
+@keyframes fire-effect {
+  0% { text-shadow: 0 0 8px #ff6e00, 0 0 24px #ff3e00, 0 0 48px #ff0000; }
+  50% { text-shadow: 0 0 24px #ff6e00, 0 0 48px #ff3e00, 0 0 96px #ff0000; }
+  100% { text-shadow: 0 0 8px #ff6e00, 0 0 24px #ff3e00, 0 0 48px #ff0000; }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>スパーク（spark）<button class="see-btn" onclick="triggerAnim(this, 'spark')">見る</button></h2>
+      <div class="sample"><span class="spark anim-target">Spark!!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.spark {
+  display: inline-block;
+  position: relative;
+  animation: spark 1s linear both;
+}
+.spark::after {
+  content: '✨';
+  position: absolute;
+  left: 100%; top: 0;
+  opacity: 0;
+  animation: spark-after 1s linear both;
+}
+@keyframes spark {
+  0% { color: #fff; }
+  50% { color: #ffe66e; }
+  100% { color: #fff; }
+}
+@keyframes spark-after {
+  0% { opacity: 0; left: 100%; }
+  40% { opacity: 1; left: 110%; }
+  100% { opacity: 0; left: 120%; }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>爆発（explode）<button class="see-btn" onclick="triggerAnim(this, 'explode')">見る</button></h2>
+      <div class="sample"><span class="explode anim-target">BOOM!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.explode {
+  display: inline-block;
+  animation: explode 0.7s cubic-bezier(.4,1.6,.6,1) both;
+}
+@keyframes explode {
+  0% { letter-spacing: 0; opacity: 1; transform: scale(1); }
+  60% { letter-spacing: 0.5em; opacity: 1; transform: scale(1.3); }
+  100% { letter-spacing: 1em; opacity: 0; transform: scale(2); }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>ネオン（neon）<button class="see-btn" onclick="triggerAnim(this, 'neon')">見る</button></h2>
+      <div class="sample"><span class="neon anim-target">NEON</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.neon {
+  display: inline-block;
+  color: #fff;
+  text-shadow: 0 0 8px #4f8cff, 0 0 24px #4f8cff, 0 0 48px #ff6ec4;
+  animation: neon 1.2s alternate infinite;
+}
+@keyframes neon {
+  0% { text-shadow: 0 0 8px #4f8cff, 0 0 24px #4f8cff, 0 0 48px #ff6ec4; }
+  50% { text-shadow: 0 0 32px #ff6ec4, 0 0 64px #4f8cff, 0 0 128px #fff; }
+  100% { text-shadow: 0 0 8px #4f8cff, 0 0 24px #4f8cff, 0 0 48px #ff6ec4; }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>波打ち（wave）<button class="see-btn" onclick="triggerAnim(this, 'wave')">見る</button></h2>
+      <div class="sample"><span class="wave anim-target">Wave Animation</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.wave {
+  display: inline-block;
+  animation: wave 1.2s infinite linear;
+}
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  15% { transform: rotate(14deg); }
+  30% { transform: rotate(-8deg); }
+  40% { transform: rotate(14deg); }
+  50% { transform: rotate(-4deg); }
+  60% { transform: rotate(10deg); }
+  70% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>シャッター（shutter）<button class="see-btn" onclick="triggerAnim(this, 'shutter')">見る</button></h2>
+      <div class="sample"><span class="shutter anim-target">SHUTTER</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.shutter {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+.shutter::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: #4f8cff;
+  z-index: 2;
+  animation: shutter 1s cubic-bezier(.4,1.6,.6,1) both;
+}
+@keyframes shutter {
+  0% { left: 0; width: 100%; }
+  100% { left: 100%; width: 0; }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>パーティクル（particle）<button class="see-btn" onclick="triggerAnim(this, 'particle')">見る</button></h2>
+      <div class="sample"><span class="particle anim-target">Particle!</span></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>.particle {
+  display: inline-block;
+  position: relative;
+  animation: particle 1.2s linear both;
+}
+.particle::after {
+  content: '✦';
+  position: absolute;
+  left: 50%; top: 50%;
+  font-size: 2em;
+  color: #ffe66e;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.2);
+  animation: particle-after 1.2s linear both;
+}
+@keyframes particle {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  100% { opacity: 1; }
+}
+@keyframes particle-after {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.2); }
+  40% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(2); }
+}
+</code></pre>
+    </div>
+  </div>
+  <script>
+    function copyCode(btn) {
+      const code = btn.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'コピー済み!';
+      setTimeout(() => btn.textContent = 'コピー', 1200);
+    }
+    function triggerAnim(btn, animClass) {
+      const sample = btn.closest('.cheat-block').querySelector('.anim-target');
+      sample.classList.remove('animate');
+      sample.classList.remove(animClass);
+      // glitch用: data-text属性を再設定して再描画を促す
+      if(animClass === 'glitch') {
+        sample.removeAttribute('data-text');
+        void sample.offsetWidth;
+        sample.setAttribute('data-text', sample.textContent);
+      }
+      void sample.offsetWidth;
+      if(animClass === 'outline-appear') {
+        sample.classList.add('animate');
+      }
+      sample.classList.add(animClass);
+    }
+  </script>
+</body>
+</html>

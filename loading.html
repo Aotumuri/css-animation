@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ローディング素材 - CSSチートシート</title>
+  <style>
+    body { font-family: sans-serif; background: #f7f7f7; margin: 0; padding: 0; }
+    .container { max-width: 700px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px #0001; padding: 32px; }
+    h1 { text-align: center; }
+    .cheat-block { margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 32px; }
+    .sample { margin: 16px 0; padding: 24px; background: #f0f4ff; border-radius: 8px; display: flex; align-items: center; justify-content: center; min-height: 60px; }
+    pre { background: #222; color: #fff; padding: 16px; border-radius: 8px; overflow-x: auto; position: relative; }
+    button.copy-btn { position: absolute; top: 8px; right: 8px; background: #4f8cff; color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-size: 0.9em; }
+    button.copy-btn:hover { background: #2563eb; }
+    .back-link { display: inline-block; margin-bottom: 24px; color: #4f8cff; text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+    /* ローディングサンプル用 */
+    .spinner {
+      width: 48px; height: 48px;
+      border: 5px solid #eee;
+      border-top: 5px solid #4f8cff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+    .bar-loader {
+      width: 80px; height: 12px;
+      background: #eee;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+    .bar-loader .bar {
+      width: 0; height: 100%;
+      background: linear-gradient(90deg, #4f8cff, #ff6ec4);
+      animation: barload 1.2s infinite alternate;
+    }
+    @keyframes barload {
+      0% { width: 0; }
+      100% { width: 100%; }
+    }
+    .dot-loader {
+      display: flex;
+      gap: 8px;
+    }
+    .dot-loader span {
+      width: 14px; height: 14px;
+      background: #4f8cff;
+      border-radius: 50%;
+      display: block;
+      animation: dot-bounce 0.8s infinite alternate;
+    }
+    .dot-loader span:nth-child(2) { animation-delay: 0.2s; }
+    .dot-loader span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes dot-bounce {
+      to { transform: translateY(-12px); opacity: 0.5; }
+    }
+    .ripple-loader {
+      position: relative;
+      width: 48px; height: 48px;
+    }
+    .ripple-loader span {
+      position: absolute;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      border: 4px solid #4f8cff;
+      border-radius: 50%;
+      animation: ripple-ani 1.2s infinite;
+      opacity: 0.7;
+    }
+    @keyframes ripple-ani {
+      0% { transform: scale(0.2); opacity: 0.7; }
+      100% { transform: scale(1.2); opacity: 0; }
+    }
+    .grad-spinner {
+      width: 48px; height: 48px;
+      border: 5px solid #eee;
+      border-top: 5px solid #ff6ec4;
+      border-right: 5px solid #4f8cff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    .color-bar-loader {
+      width: 100px; height: 14px;
+      background: #eee;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+    .color-bar-loader .bar {
+      width: 0; height: 100%;
+      background: linear-gradient(90deg, #ff6ec4, #4f8cff, #6effc4, #ffe66e);
+      animation: colorbarload 1.4s infinite alternate;
+    }
+    @keyframes colorbarload {
+      0% { width: 0; }
+      100% { width: 100%; }
+    }
+    .donut-loader {
+      width: 48px; height: 48px;
+      border: 5px solid #eee;
+      border-top: 5px solid #4f8cff;
+      border-bottom: 5px solid #ff6ec4;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    .skeleton-loader {
+      width: 120px; height: 18px;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #eee 25%, #f0f4ff 50%, #eee 75%);
+      background-size: 200% 100%;
+      animation: skeleton 1.2s infinite linear;
+    }
+    @keyframes skeleton {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .bounce-loader {
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+    }
+    .bounce-loader span {
+      width: 12px; height: 12px;
+      background: #4f8cff;
+      border-radius: 50%;
+      display: block;
+      animation: bounce 0.6s infinite alternate;
+    }
+    .bounce-loader span:nth-child(2) { animation-delay: 0.2s; }
+    .bounce-loader span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes bounce {
+      to { transform: translateY(-18px); opacity: 0.7; }
+    }
+    .ring-loader {
+      width: 48px; height: 48px;
+      border: 4px solid #4f8cff44;
+      border-top: 4px solid #4f8cff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    .flash-loader {
+      width: 48px; height: 12px;
+      background: linear-gradient(90deg, #4f8cff 0%, #fff 50%, #4f8cff 100%);
+      border-radius: 8px;
+      animation: flash 1s linear infinite;
+    }
+    @keyframes flash {
+      0% { background-position: 0 0; }
+      100% { background-position: 100% 0; }
+    }
+    /* ハートローダー修正版 */
+    .heart-loader {
+      width: 32px; height: 32px;
+      position: relative;
+      display: inline-block;
+      animation: heart-beat 0.8s infinite;
+    }
+    .heart-loader::before,
+    .heart-loader::after {
+      content: '';
+      position: absolute;
+      top: 8px;
+      width: 16px; height: 24px;
+      background: #ff6ec4;
+      border-radius: 16px 16px 0 0;
+    }
+    .heart-loader::before {
+      left: 8px;
+      transform: rotate(-45deg);
+    }
+    .heart-loader::after {
+      left: 0;
+      transform: rotate(45deg);
+    }
+    @keyframes heart-beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Hubに戻る</a>
+    <h1>ローディング素材</h1>
+    <div class="cheat-block">
+      <h2>スピナー</h2>
+      <div class="sample"><div class="spinner"></div></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;div class="spinner"&gt;&lt;/div&gt;
+.spinner {
+  width: 48px; height: 48px;
+  border: 5px solid #eee;
+  border-top: 5px solid #4f8cff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>バー型ローダー</h2>
+      <div class="sample"><div class="bar-loader"><div class="bar"></div></div></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;div class="bar-loader"&gt;&lt;div class="bar"&gt;&lt;/div&gt;&lt;/div&gt;
+.bar-loader {
+  width: 80px; height: 12px;
+  background: #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+.bar-loader .bar {
+  width: 0; height: 100%;
+  background: linear-gradient(90deg, #4f8cff, #ff6ec4);
+  animation: barload 1.2s infinite alternate;
+}
+@keyframes barload {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>ドット3つローダー</h2>
+      <div class="sample">
+        <div class="dot-loader">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;div class="dot-loader"&gt;
+  &lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;
+&lt;/div&gt;
+.dot-loader {
+  display: flex;
+  gap: 8px;
+}
+.dot-loader span {
+  width: 14px; height: 14px;
+  background: #4f8cff;
+  border-radius: 50%;
+  display: block;
+  animation: dot-bounce 0.8s infinite alternate;
+}
+.dot-loader span:nth-child(2) { animation-delay: 0.2s; }
+.dot-loader span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes dot-bounce {
+  to { transform: translateY(-12px); opacity: 0.5; }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>波紋ローダー</h2>
+      <div class="sample"><div class="ripple-loader"><span></span></div></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;div class="ripple-loader"&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+.ripple-loader {
+  position: relative;
+  width: 48px; height: 48px;
+}
+.ripple-loader span {
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  border: 4px solid #4f8cff;
+  border-radius: 50%;
+  animation: ripple-ani 1.2s infinite;
+  opacity: 0.7;
+}
+@keyframes ripple-ani {
+  0% { transform: scale(0.2); opacity: 0.7; }
+  100% { transform: scale(1.2); opacity: 0; }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>グラデーション円ローダー</h2>
+      <div class="sample"><div class="grad-spinner"></div></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;div class="grad-spinner"&gt;&lt;/div&gt;
+.grad-spinner {
+  width: 48px; height: 48px;
+  border: 5px solid #eee;
+  border-top: 5px solid #ff6ec4;
+  border-right: 5px solid #4f8cff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>カラフルバー</h2>
+      <div class="sample"><div class="color-bar-loader"><div class="bar"></div></div></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;div class="color-bar-loader"&gt;&lt;div class="bar"&gt;&lt;/div&gt;&lt;/div&gt;
+.color-bar-loader {
+  width: 100px; height: 14px;
+  background: #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+.color-bar-loader .bar {
+  width: 0; height: 100%;
+  background: linear-gradient(90deg, #ff6ec4, #4f8cff, #6effc4, #ffe66e);
+  animation: colorbarload 1.4s infinite alternate;
+}
+@keyframes colorbarload {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>ドーナツローダー</h2>
+      <div class="sample"><div class="donut-loader"></div></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;div class="donut-loader"&gt;&lt;/div&gt;
+.donut-loader {
+  width: 48px; height: 48px;
+  border: 5px solid #eee;
+  border-top: 5px solid #4f8cff;
+  border-bottom: 5px solid #ff6ec4;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>スケルトンローダー</h2>
+      <div class="sample"><div class="skeleton-loader"></div></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;div class="skeleton-loader"&gt;&lt;/div&gt;
+.skeleton-loader {
+  width: 120px; height: 18px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #eee 25%, #f0f4ff 50%, #eee 75%);
+  background-size: 200% 100%;
+  animation: skeleton 1.2s infinite linear;
+}
+@keyframes skeleton {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>バウンスローダー</h2>
+      <div class="sample"><div class="bounce-loader"><span></span><span></span><span></span></div></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;div class="bounce-loader"&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+.bounce-loader {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+.bounce-loader span {
+  width: 12px; height: 12px;
+  background: #4f8cff;
+  border-radius: 50%;
+  display: block;
+  animation: bounce 0.6s infinite alternate;
+}
+.bounce-loader span:nth-child(2) { animation-delay: 0.2s; }
+.bounce-loader span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes bounce {
+  to { transform: translateY(-18px); opacity: 0.7; }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>リングローダー</h2>
+      <div class="sample"><div class="ring-loader"></div></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;div class="ring-loader"&gt;&lt;/div&gt;
+.ring-loader {
+  width: 48px; height: 48px;
+  border: 4px solid #4f8cff44;
+  border-top: 4px solid #4f8cff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>フラッシュローダー</h2>
+      <div class="sample"><div class="flash-loader"></div></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;div class="flash-loader"&gt;&lt;/div&gt;
+.flash-loader {
+  width: 48px; height: 12px;
+  background: linear-gradient(90deg, #4f8cff 0%, #fff 50%, #4f8cff 100%);
+  border-radius: 8px;
+  animation: flash 1s linear infinite;
+}
+@keyframes flash {
+  0% { background-position: 0 0; }
+  100% { background-position: 100% 0; }
+}
+</code></pre>
+    </div>
+    <div class="cheat-block">
+      <h2>ハートローダー</h2>
+      <div class="sample"><div class="heart-loader"></div></div>
+      <pre><button class="copy-btn" onclick="copyCode(this)">コピー</button><code>&lt;div class="heart-loader"&gt;&lt;/div&gt;
+.heart-loader {
+  width: 32px; height: 32px;
+  position: relative;
+  display: inline-block;
+  animation: heart-beat 0.8s infinite;
+}
+.heart-loader::before,
+.heart-loader::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  width: 16px; height: 24px;
+  background: #ff6ec4;
+  border-radius: 16px 16px 0 0;
+}
+.heart-loader::before {
+  left: 8px;
+  transform: rotate(-45deg);
+}
+.heart-loader::after {
+  left: 0;
+  transform: rotate(45deg);
+}
+@keyframes heart-beat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+</code></pre>
+    </div>
+  </div>
+  <script>
+    function copyCode(btn) {
+      const code = btn.nextElementSibling.innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = 'コピー済み!';
+      setTimeout(() => btn.textContent = 'コピー', 1200);
+    }
+  </script>
+</body>
+</html>
